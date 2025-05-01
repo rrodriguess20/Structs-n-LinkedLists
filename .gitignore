@@ -136,7 +136,7 @@ dist
 .pnp.*
 
 # GCC build artifacts
-.o
-.out
-.elf
-.so
+*.o
+*.out
+*.elf
+*.so
