@@ -15,34 +15,9 @@ typedef struct celula{
 
 typedef Celula * CCelula;
 
-CCelula criaCelula(){
-
-	return NULL;
-}
-
-CCelula insereElemento(CCelula lista, int i){
-
-	CCelula novo =  (CCelula)malloc(sizeof(Celula));
-
-	novo->info = i;
-	novo->prox = lista;
-	return novo;
-}
-
-void contaCelulas(CCelula lista){
-
-	int count = 0;
-	CCelula listaAuxiliar = (CCelula)malloc(sizeof(Celula));
-	listaAuxiliar = lista;
-
-	while(listaAuxiliar!=NULL){
-
-		count++;
-		listaAuxiliar = listaAuxiliar->prox;
-	}
-
-	printf("O numero de elementos na lista e: %d\n", count);
-}
+CCelula criaCelula();
+CCelula insereElemento(CCelula lista, int i);
+void contaCelulas(CCelula lista);
 
 int main(){
 
@@ -58,4 +33,36 @@ int main(){
 	contaCelulas(teste);
 
 	return 0;
-}	
+}
+
+CCelula criaCelula(){
+
+	CCelula cabeca = (CCelula)malloc(sizeof(Celula));
+	cabeca->prox = NULL; // nó inicial, valor nulo
+	return cabeca;
+}
+
+CCelula insereElemento(CCelula lista, int i){
+
+	CCelula novo =  (CCelula)malloc(sizeof(Celula));
+
+	novo->info = i;
+	novo->prox = lista->prox;
+	lista->prox = novo;
+
+	return novo;
+}
+
+void contaCelulas(CCelula lista){
+
+	int count = 0;
+	CCelula listaAuxiliar = lista->prox;
+
+	while(listaAuxiliar!=NULL){
+
+		count++;
+		listaAuxiliar = listaAuxiliar->prox;
+	}
+
+	printf("O numero de elementos na lista e: %d\n", count);
+}
