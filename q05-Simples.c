@@ -86,5 +86,3 @@ void imprime(celula *lista)
 
 	printf("\n");
 }
-
-//aprender a inserir os elementos em ordem
