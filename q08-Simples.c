@@ -25,7 +25,7 @@ int main(){
 	insere(listaA, 1);
 
 	insere(listaB, 3);
-	insere(listaB, 5);
+	insere(listaB, 2);
 	insere(listaB, 1);
 
 	verifica(listaA, listaB);
@@ -70,7 +70,7 @@ void verifica(celula *listaA, celula * listaB){
 
 	int verificacao = 0;
 
-	while(auxiliarA!=NULL&&auxiliarB!=NULL){ //teria que verificar se B é NULL também
+	while(auxiliarA!=NULL&&auxiliarB!=NULL){
 
 		if(auxiliarA->info==auxiliarB->info){
 
