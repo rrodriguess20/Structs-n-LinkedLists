@@ -8,12 +8,13 @@ typedef struct celula{
 
 	int info;
 	struct celula * prox;
+	struct celula * ant;
 }celula;
 
 celula *criaLista();
 void insere(celula *lista, int x);
 void imprime(celula *lista);
-celula * removeItem(celula * lista, int i); //int i = i-ésimo item
+celula * removeItem(celula * lista, int i);
 
 int main(){
 
@@ -34,19 +35,25 @@ int main(){
 
 celula *criaLista(){
 
-	celula *cabeca = (celula *)malloc(sizeof(celula));
+	celula * cabeca = (celula*)malloc(sizeof(celula));
 
 	cabeca->prox = NULL;
-
+	
 	return cabeca;
+
 }
 
 void insere(celula *lista, int x){
 
-	celula *auxiliar = (celula *)malloc(sizeof(celula));
+	celula * auxiliar = (celula*)malloc(sizeof(celula));
 
 	auxiliar->info = x;
 	auxiliar->prox = lista->prox;
+	auxiliar->ant = lista;
+
+	if(lista->prox!=NULL)
+		lista->prox->ant = auxiliar;
+	
 	lista->prox = auxiliar;
 }
 
@@ -65,22 +72,26 @@ void imprime(celula *lista){
 celula * removeItem(celula * lista, int i){
 
 	celula * auxiliar = lista;
+	int posicao = 0;
 
-	for(int j = 1; j<i; j++){ // j = 1 para que o i-ésimo item não seja contado de 0 até o número...
+	while(auxiliar!=NULL && posicao<i){
 
-		if(auxiliar->prox==NULL)
-			return lista;
-		
 		auxiliar = auxiliar->prox;
+		posicao++;
 	}
 
-	if(auxiliar->prox==NULL)
-		return lista;
-
-	celula * removida = auxiliar->prox;
-	auxiliar->prox = removida->prox;
+	if(auxiliar==NULL)
+		printf("Posicao invalida!\n");
 	
-	free(removida);
+	else{
+
+		auxiliar->ant->prox = auxiliar->prox;
+
+		if(auxiliar->prox!=NULL)
+			auxiliar->prox->ant = auxiliar->ant;
+	}
+
+	free(auxiliar);
 
 	return lista;
 }
